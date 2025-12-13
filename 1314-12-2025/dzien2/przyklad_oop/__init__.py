@@ -1,0 +1,1 @@
+# Pakiet pizzeria OOP - aplikacja do obsługi pizzerii w wersji obiektowej

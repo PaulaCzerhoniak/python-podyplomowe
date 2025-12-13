@@ -1,0 +1,1 @@
+# Pakiet pizzeria - aplikacja do obsługi pizzerii
