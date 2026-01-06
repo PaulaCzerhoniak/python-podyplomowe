@@ -27,10 +27,10 @@
 Przepisanie aplikacji pizzerii na **programowanie obiektowe**:
 - **Klasy podstawowe** - Pizza, Menu, Customer
 - **Dziedziczenie** - VIPCustomer
+- **Refaktoryzacja** - pełne przepisanie z proceduralnego na OOP
 - **Wyjątki** - własne klasy wyjątków
 - **I/O** - zapis/odczyt danych do JSON
 - **Testy** - unit testy z pytest
-- **Refaktoryzacja** - pełne przepisanie z proceduralnego na OOP
 
 ### Struktura projektu (OOP)
 

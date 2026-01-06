@@ -2,14 +2,11 @@
 Moduł zarządzania zamówieniami.
 """
 
-# TODO: Zaimportuj moduł menu
-# from . import menu
+import menu
+import customers
 
-# TODO: Utwórz globalną listę orders
-# orders = []
-
-# TODO: Utwórz zmienną globalną next_order_id = 1
-
+orders = []
+next_order_id = 1
 
 # TODO: Zaimplementuj funkcję create_order(customer_id)
 # Powinna:
@@ -19,6 +16,24 @@ Moduł zarządzania zamówieniami.
 # - Wyświetlić komunikat
 # - Zwiększyć next_order_id o 1
 # - Zwrócić ID zamówienia
+def create(customer_id):
+    global next_order_id
+    order_id = next_order_id
+
+    cust = customers.find_customer(customer_id)
+    if not cust:
+        print('Klient nie istnieje')
+        return False
+
+    order = {'id': order_id, 'customer_id': customer_id, 'items': []}
+
+    orders.append(order)
+
+    print(f'Dodano zamówienie dla klienta: {customer_id}')
+    next_order_id += 1
+
+    return order_id
+
 
 
 # TODO: Zaimplementuj funkcję find_order(order_id)

@@ -6,14 +6,5 @@ from customer import Customer, VIPCustomer
 def main():
     print("Witaj w aplikacji pizzerii OOP!")
 
-    pizza = Pizza('Margherita', 100)
-
-    customer = Customer('Jan', '123')
-    vip = VIPCustomer('Anna', '123', 10)
-
-    print(pizza.get_price(customer))
-    print(pizza.get_price(vip))
-
-
 if __name__ == "__main__":
     main()

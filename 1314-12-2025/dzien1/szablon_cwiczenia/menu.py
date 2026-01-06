@@ -2,30 +2,30 @@
 Moduł zarządzania menu pizzerii.
 """
 
-# TODO: Utwórz globalną listę pizzas
-# pizzas = []
+menu = []
 
+def add_pizza(name, price):
+    pizza = {
+        'name': name,
+        'price': price
+    }
+    menu.append(pizza)
+    print(f"Dodano: {name} za {price} zl")
 
-# TODO: Zaimplementuj funkcję add_pizza(name, price)
-# Powinna:
-# - Utworzyć słownik {'name': name, 'price': price}
-# - Dodać go do listy pizzas
-# - Wyświetlić komunikat
+def list_menu():
+    if not menu: #lista pusta: Node.js = True, C++ = True, w Pythonie = False
+        print("Menu jest puste!")
+        return
 
+    print("=== MENU ===")
+    for pizza in menu:
+        print(f"{pizza['name']}: {pizza['price']} zl")
 
-# TODO: Zaimplementuj funkcję list_pizzas()
-# Powinna:
-# - Sprawdzić czy lista nie jest pusta
-# - Wyświetlić nagłówek "=== MENU ==="
-# - Iterować po pizzach i wyświetlić każdą
-
-
-# TODO: Zaimplementuj funkcję find_pizza(name)
-# Powinna:
-# - Iterować po liście pizzas
-# - Znaleźć pizzę o danej nazwie
-# - Zwrócić słownik pizzy lub None
-
+def find_pizza(name):
+    for pizza in menu:
+        if pizza['name'] == name:
+            return pizza
+    return None
 
 # BONUS: Zaimplementuj funkcję update_pizza_price(name, new_price)
 # Powinna:

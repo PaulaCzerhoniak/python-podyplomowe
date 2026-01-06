@@ -2,28 +2,41 @@
 Moduł zarządzania klientami pizzerii.
 """
 
-# TODO: Utwórz globalną listę customers
-# customers = []
+customers = []
+next_customer_id = 1
 
-# TODO: Utwórz zmienną globalną next_customer_id = 1
-
-
-# TODO: Zaimplementuj funkcję add_customer(name, phone)
-# Powinna:
-# - Zadeklarować: global next_customer_id
-# - Utworzyć słownik {'id': next_customer_id, 'name': name, 'phone': phone}
-# - Dodać go do listy customers
-# - Wyświetlić komunikat z ID
-# - Zwiększyć next_customer_id o 1
-# - Zwrócić ID klienta
-
+def add_customer(name, phone):
+    global next_customer_id
+    customerId = next_customer_id
+    customer = {
+        'id': customerId,
+        'name': name,
+        'phone': phone
+    }
+    customers.append(customer)
+    print(f'Dodano klienta, id: {customerId}')
+    next_customer_id += 1
+    return customerId
 
 # TODO: Zaimplementuj funkcję find_customer(customer_id)
 # Powinna:
 # - Iterować po liście customers
 # - Znaleźć klienta o danym ID
 # - Zwrócić słownik klienta lub None
+def find_customer(customer_id):
+    """
+    Znajduje klienta po ID.
 
+    Args:
+        customer_id (int): ID klienta
+
+    Returns:
+        dict or None: Słownik z danymi klienta lub None jeśli nie znaleziono
+    """
+    for customer in customers:
+        if customer['id'] == customer_id:
+            return customer
+    return None
 
 # TODO: Zaimplementuj funkcję list_customers()
 # Powinna:

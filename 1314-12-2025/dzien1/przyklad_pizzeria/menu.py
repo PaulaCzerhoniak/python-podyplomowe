@@ -1,18 +1,23 @@
 # Moduł menu - zarządzanie menu pizzerii
 
+class Pizza:
+    def __init__(self, name, price):
+        if price <= 0:
+            raise ValueError("Cena musi byc > 0")
+        self.__name = name
+        self.__price = price
+
+    def name(self):
+        return self.__name
+
+    def price(self):
+        return self.__price
+
 pizzas = []  # Lista pizz w menu
 
-def add_pizza(name, price):
-    """
-    Dodaje pizzę do menu.
-
-    Args:
-        name (str): Nazwa pizzy
-        price (float): Cena pizzy
-    """
-    pizza = {'name': name, 'price': price}
+def add_pizza(pizza):
     pizzas.append(pizza)
-    print(f"Dodano pizzę: {name} za {price} zł")
+    print(f"Dodano pizzę: {pizza.name()} za {pizza.price()} zł")
 
 def remove_pizza(name):
     """
@@ -34,7 +39,7 @@ def list_pizzas():
         return
     print("Menu pizzerii:")
     for pizza in pizzas:
-        print(f"- {pizza['name']}: {pizza['price']} zł")
+        print(f"- {pizza.name()}: {pizza.price()} zł")
 
 def find_pizza(name):
     """

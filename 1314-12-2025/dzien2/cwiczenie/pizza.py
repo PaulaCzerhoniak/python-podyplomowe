@@ -24,7 +24,7 @@ class Pizza:
         self.price = new_price
 
     def get_price(self, customer):
-        return self.price
+        return self.price - (self.price * (customer.discount_percent() / 100))
 
 # Klasa Menu - zarządza kolekcją pizz
 class Menu:

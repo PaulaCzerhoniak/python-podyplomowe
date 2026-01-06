@@ -23,6 +23,9 @@ class Pizza:
             raise ValueError("Cena musi być większa od zera")
         self.price = new_price
 
+    def get_price(self, customer):
+        return self.price
+
 # Klasa Menu - zarządza kolekcją pizz
 class Menu:
     def __init__(self):

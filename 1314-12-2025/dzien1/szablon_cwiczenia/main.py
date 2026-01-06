@@ -34,6 +34,15 @@ def main():
     # TODO: Wyświetl zamówienie
     # orders.list_order(order1_id)
 
+def cli():
+    print()
+    # 1. Dodaj pozycje menu
+    # 2. Dodaj klienta
+    # 3. Dodaj zamowienie
+    # 4. Wyswietl pozycje menu
+    # 5. Wyswietl klientow
+    # 6. Wyswietl zamowienia
+
 
 if __name__ == "__main__":
     main()
