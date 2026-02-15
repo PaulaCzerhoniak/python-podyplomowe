@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Margherita",
+    "price": 25.0
+  },
+  {
+    "name": "Pepperoni",
+    "price": 30.0
+  },
+  {
+    "name": "Hawajska",
+    "price": 32.0
+  },
+  {
+    "name": "Quattro Formaggi",
+    "price": 35.0
+  },
+  {
+    "name": "Prosciutto",
+    "price": 40.0
+  },
+  {
+    "name": "Diavola",
+    "price": 38.0
+  },
+  {
+    "name": "Parma",
+    "price": 31.0
+  },
+  {
+    "name": "Spinaci",
+    "price": 33.0
+  },
+  {
+    "name": "Wegetariańska",
+    "price": 40.0
+  }
+]

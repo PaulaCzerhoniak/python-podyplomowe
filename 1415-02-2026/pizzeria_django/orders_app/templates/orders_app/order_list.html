@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Zamówienia{% endblock %}
+
+{% block content %}
+<h1>Zamówienia</h1>
+
+<div class="menu-buttons" style="margin-bottom: 20px;">
+    <a href="/zamowienia/nowe/" class="btn btn-success">
+    Złóż nowe zamówienie </a>
+</div>
+
+{% if orders %}
+<table class="table table-striped" style="width: 100%; max-width: 800px; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th style="text-align: left; padding: 8px;">#</th>
+            <th style="text-align: left; padding: 8px;">Klient</th>
+            <th style="text-align: left; padding: 8px;">Pozycje</th>
+            <th style="text-align: left; padding: 8px;">Suma</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td style="padding: 8px;"><a href="/zamowienia/{{ order.id }}/">#{{ order.id }}</a></td>
+            <td style="padding: 8px;">{{ order.customer_name }} {% if order.is_vip %}(VIP){% endif %}</td>
+            <td style="padding: 8px;">{{ order.items_count }}</td>
+            <td style="padding: 8px;">{{ order.total }} zł</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Brak zamówień. <a href="/zamowienia/nowe/">Złóż pierwsze zamówienie</a></p>
+{% endif %}
+
+{% endblock %}

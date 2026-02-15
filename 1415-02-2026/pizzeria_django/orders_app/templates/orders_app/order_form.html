@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Nowe zamówienie{% endblock %}
+
+{% block content %}
+<h1>Złóż zamówienie</h1>
+
+{% if errors %}
+<div style="color: red; margin-bottom: 15px;">
+    {% for error in errors %}
+    <p>{{ error }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+<form method="post" style="max-width: 400px;">
+    {% csrf_token %}
+    <div style="margin-bottom: 10px;">
+        <label for="customer_id">Klient:</label>
+        <select id="customer_id" name="customer_id" required class="form-control">
+            <option value="">-- Wybierz klienta --</option>
+            {% for customer in customers %}
+            <option value="{{ customer.id }}" {% if customer.id == customer_id %}selected{% endif %}>{{ customer.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <label for="pizza_name">Pizza:</label>
+        <select id="pizza_name" name="pizza_name" required class="form-control">
+            <option value="">-- Wybierz pizzę --</option>
+            {% for pizza in pizzas %}
+            <option value="{{ pizza.name }}" {% if pizza.name == pizza_name %}selected{% endif %}>
+                {{ pizza.name }} ({{ pizza.price }} zł)
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div style="margin-bottom: 20px;">
+        <label for="quantity">Ilość:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="{{ quantity|default:1 }}" required class="form-control">
+    </div>
+    <div style="display: flex; gap: 10px;">
+        <button type="submit" class="btn btn-success" style="flex: 1;">Złóż zamówienie</button>
+        <a href="/zamowienia/" class="btn btn-secondary" style="flex: 1;">Powrót do listy zamówień</a>
+    </div>
+</form>
+
+{% endblock %}

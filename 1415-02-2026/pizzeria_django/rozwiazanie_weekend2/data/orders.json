@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "customer_id": 2,
+    "items": [
+      {
+        "pizza_name": "Prosciutto",
+        "pizza_price": 40.0,
+        "quantity": 2
+      }
+    ],
+    "discount_percent": 15
+  },
+  {
+    "id": 2,
+    "customer_id": 5,
+    "items": [
+      {
+        "pizza_name": "Hawajska",
+        "pizza_price": 32.0,
+        "quantity": 1
+      }
+    ],
+    "discount_percent": 20.0
+  },
+  {
+    "id": 3,
+    "customer_id": 6,
+    "items": [
+      {
+        "pizza_name": "Wegetariańska",
+        "pizza_price": 40.0,
+        "quantity": 4
+      }
+    ],
+    "discount_percent": null
+  },
+  {
+    "id": 4,
+    "customer_id": 3,
+    "items": [
+      {
+        "pizza_name": "Hawajska",
+        "pizza_price": 32.0,
+        "quantity": 1
+      }
+    ],
+    "discount_percent": 20
+  }
+]

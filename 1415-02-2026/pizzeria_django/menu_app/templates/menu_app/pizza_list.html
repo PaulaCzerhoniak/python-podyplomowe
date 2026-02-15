@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+<h1>Menu Pizzerii</h1>
+
+<div class="menu-buttons" style="margin-bottom: 20px;">
+    <a href="/menu/dodaj/" class="btn btn-success">Dodaj nową pizzę</a>
+</div>
+
+{% if pizzas %}
+<table class="table table-striped" style="width: 100%; max-width: 600px; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th style="text-align: left; padding: 8px;">Nazwa</th>
+            <th style="text-align: left; padding: 8px;">Cena</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pizza in pizzas %}
+        <tr>
+            <td style="padding: 8px;"><a href="/menu/{{ pizza.name }}/">{{ pizza.name }}</a></td>
+            <td style="padding: 8px;">{{ pizza.price }} zł</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Brak pizz w menu.</p>
+{% endif %}
+
+{% endblock %}

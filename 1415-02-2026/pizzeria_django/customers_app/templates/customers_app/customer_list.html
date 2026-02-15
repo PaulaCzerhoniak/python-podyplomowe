@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Klienci{% endblock %}
+
+{% block content %}
+<h1>Lista klientów</h1>
+
+<div class="menu-buttons" style="margin-bottom: 20px;">
+    <a href="/klienci/dodaj/" class="btn btn-success">Dodaj nowego klienta</a>
+</div>
+
+{% if customers %}
+<table class="table table-striped" style="width: 100%; max-width: 800px; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th style="text-align: left; padding: 8px;">ID</th>
+            <th style="text-align: left; padding: 8px;">Imię</th>
+            <th style="text-align: left; padding: 8px;">Telefon</th>
+            <th style="text-align: left; padding: 8px;">Typ</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in customers %}
+        <tr>
+            <td style="padding: 8px;">{{ customer.id }}</td>
+            <td style="padding: 8px;">{{ customer.name }}</td>
+            <td style="padding: 8px;">{{ customer.phone }}</td>
+            <td style="padding: 8px;">
+                {% if customer.discount_percent is not None %}
+                    VIP ({{ customer.discount_percent }}%)
+                {% else %}
+                    Zwykły
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Brak klientów.</p>
+{% endif %}
+
+{% endblock %}
