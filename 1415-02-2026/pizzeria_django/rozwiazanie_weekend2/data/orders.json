@@ -46,5 +46,17 @@
       }
     ],
     "discount_percent": 20
+  },
+  {
+    "id": 5,
+    "customer_id": 5,
+    "items": [
+      {
+        "pizza_name": "Hawajska",
+        "pizza_price": 32.0,
+        "quantity": 3
+      }
+    ],
+    "discount_percent": 20.0
   }
 ]

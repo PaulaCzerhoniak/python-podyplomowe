@@ -1,44 +1,79 @@
 {% extends "base.html" %}
 
-{% block title %}Dodaj klienta{% endblock %}
+{% block title %}Dodaj / Edytuj klienta{% endblock %}
 
 {% block content %}
-<h1>Dodaj klienta</h1>
-
-{% if errors %}
-<div style="color: red; margin-bottom: 15px;">
-    {% for error in errors %}
-    <p>{{ error }}</p>
-    {% endfor %}
-</div>
-{% endif %}
+<h1>Dodaj / Edytuj klienta</h1>
 
 <form method="post" style="max-width: 400px;">
     {% csrf_token %}
-    <div style="margin-bottom: 10px;">
-        <label for="name">Imię:</label>
-        <input type="text" id="name" name="name" value="{{ name }}" required class="form-control">
+
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        {% for field in form %}
+            {% for error in field.errors %}
+                <p><strong>{{ field.label }}:</strong> {{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
     </div>
-    <div style="margin-bottom: 10px;">
-        <label for="phone">Telefon:</label>
-        <input type="text" id="phone" name="phone" value="{{ phone }}" required class="form-control">
+    {% endif %}
+
+    <div class="mb-3">
+        {{ form.first_name.label_tag }}
+        {{ form.first_name }}
     </div>
-    <div style="margin-bottom: 10px;">
-        <label for="type">Typ:</label>
-        <select id="type" name="type" class="form-control">
-            <option value="regular" {% if type == 'regular' %}selected{% endif %}>Zwykły klient</option>
-            <option value="vip" {% if type == 'vip' %}selected{% endif %}>VIP</option>
-        </select>
+
+    <div class="mb-3">
+        {{ form.last_name.label_tag }}
+        {{ form.last_name }}
     </div>
-    <div style="margin-bottom: 20px;">
-        <label for="discount">Rabat VIP (%):</label>
-        <input type="number" id="discount" name="discount" value="{{ discount|default:10 }}" min="1" max="50" class="form-control">
+
+    <div class="mb-3">
+        {{ form.phone.label_tag }}
+        {{ form.phone }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.customer_type.label_tag }}
+        {{ form.customer_type }}
+    </div>
+
+    <div class="mb-3" id="vip-discount-container">
+        {{ form.discount_percent.label_tag }}
+        {{ form.discount_percent }}
         <small>(tylko dla VIP)</small>
     </div>
-    <div style="display: flex; gap: 10px;">
-        <button type="submit" class="btn btn-success" style="flex: 1;">Dodaj</button>
-        <a href="/klienci/" class="btn btn-secondary" style="flex: 1;">Powrót do listy klientów</a>
+
+    <div class="mb-3">
+        {{ form.loyalty_points.label_tag }}
+        {{ form.loyalty_points }}
+    </div>
+
+    <div class="d-flex gap-2 mt-3">
+        <button type="submit" class="btn btn-success">Zapisz</button>
+        <a href="{% url 'customer_list' %}" class="btn btn-secondary">Powrót do listy klientów</a>
     </div>
 </form>
+
+<script>
+const customerTypeSelect = document.getElementById('id_customer_type');
+const vipDiscountContainer = document.getElementById('vip-discount-container');
+
+function toggleVipDiscount() {
+    if (customerTypeSelect) {
+        vipDiscountContainer.style.display =
+            customerTypeSelect.value === 'vip' ? 'block' : 'none';
+    }
+}
+
+toggleVipDiscount();
+
+if (customerTypeSelect) {
+    customerTypeSelect.addEventListener('change', toggleVipDiscount);
+}
+</script>
 
 {% endblock %}

@@ -6,22 +6,45 @@
 <h1>Menu Pizzerii</h1>
 
 <div class="menu-buttons" style="margin-bottom: 20px;">
-    <a href="/menu/dodaj/" class="btn btn-success">Dodaj nową pizzę</a>
+    <a href="{% url 'pizza_add' %}" class="btn btn-success">Dodaj nową pizzę</a>
 </div>
 
 {% if pizzas %}
 <table class="table table-striped" style="width: 100%; max-width: 600px; border-collapse: collapse;">
     <thead>
         <tr>
-            <th style="text-align: left; padding: 8px;">Nazwa</th>
-            <th style="text-align: left; padding: 8px;">Cena</th>
+            <th>Nazwa</th>
+            <th>Cena</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         {% for pizza in pizzas %}
         <tr>
-            <td style="padding: 8px;"><a href="/menu/{{ pizza.name }}/">{{ pizza.name }}</a></td>
-            <td style="padding: 8px;">{{ pizza.price }} zł</td>
+            <td>
+                <a href="{% url 'pizza_detail' pizza.id %}" class="no-underline">{{ pizza.name }}</a>
+            </td>
+            <td>{{ pizza.price }} zł</td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Akcje
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{% url 'pizza_edit' pizza.id %}">Edytuj</a>
+                        </li>
+                        <li>
+                            <form method="post" action="{% url 'pizza_delete' pizza.id %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item" onclick="return confirm('Na pewno chcesz usunąć tę pizzę?');">
+                                    Usuń
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
@@ -30,4 +53,14 @@
 <p>Brak pizz w menu.</p>
 {% endif %}
 
+<style>
+/* Klasa do linków bez podkreślenia */
+.no-underline {
+    text-decoration: none; /* usuwa podkreślenie */
+    color: inherit;        /* zachowuje kolor tekstu */
+}
+.no-underline:hover {
+    color: #0d6efd;        /* efekt hover, można zmienić */
+}
+</style>
 {% endblock %}

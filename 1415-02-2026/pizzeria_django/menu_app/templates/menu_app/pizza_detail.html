@@ -4,6 +4,11 @@
 
 {% block content %}
 <h1>{{ pizza.name }}</h1>
-<p>Cena: {{ pizza.price }} zl</p>
-<a href="/menu/">Powrot do menu</a>
+<p>Cena: {{ pizza.price }} zł</p>
+
+<!-- Przycisk powrotu do menu -->
+<a href="{% url 'pizza_list' %}" class="btn btn-success">Powrót do menu</a>
+
+<!-- Przycisk edycji pizzy -->
+<a href="{% url 'pizza_edit' pizza.id %}" class="btn btn-primary">Edytuj pizzę</a>
 {% endblock %}

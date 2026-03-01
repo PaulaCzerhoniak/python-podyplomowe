@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Dodaj pizzę{% endblock %}
+{% block title %}{% if pizza %}Edytuj{% else %}Dodaj{% endif %} pizzę{% endblock %}
 
 {% block content %}
-<h1>Dodaj nową pizzę</h1>
+<h1>{% if pizza %}Edytuj{% else %}Dodaj nową{% endif %} pizzę</h1>
 
 {% if errors %}
 <div style="color: red; margin-bottom: 15px;">
@@ -24,9 +24,10 @@
         <input type="number" id="price" name="price" step="0.01" value="{{ price }}" required class="form-control">
     </div>
     <div style="display: flex; gap: 10px;">
-        <button type="submit" class="btn btn-success" style="flex: 1;">Dodaj</button>
-        <a href="/menu/" class="btn btn-secondary" style="flex: 1;">Powrót do menu</a>
+        <button type="submit" class="btn btn-success" style="flex: 1;">
+            {% if pizza %}Zapisz zmiany{% else %}Dodaj{% endif %}
+        </button>
+        <a href="{% url 'pizza_list' %}" class="btn btn-secondary" style="flex: 1;">Powrót do menu</a>
     </div>
 </form>
-
 {% endblock %}

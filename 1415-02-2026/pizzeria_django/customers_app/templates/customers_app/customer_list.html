@@ -1,36 +1,90 @@
 {% extends "base.html" %}
 
-{% block title %}Klienci{% endblock %}
+{% block title %}Lista klientów{% endblock %}
 
 {% block content %}
 <h1>Lista klientów</h1>
 
-<div class="menu-buttons" style="margin-bottom: 20px;">
-    <a href="/klienci/dodaj/" class="btn btn-success">Dodaj nowego klienta</a>
+<div class="mb-3">
+    <a href="{% url 'customer_add' %}" class="btn btn-success">Dodaj nowego klienta</a>
 </div>
 
 {% if customers %}
-<table class="table table-striped" style="width: 100%; max-width: 800px; border-collapse: collapse;">
+<table class="table table-striped" style="width:100%; max-width:900px;">
     <thead>
         <tr>
-            <th style="text-align: left; padding: 8px;">ID</th>
-            <th style="text-align: left; padding: 8px;">Imię</th>
-            <th style="text-align: left; padding: 8px;">Telefon</th>
-            <th style="text-align: left; padding: 8px;">Typ</th>
+            <!-- ID -->
+            <th>
+                <a href="?sort={% if current_sort == 'id' %}-id{% else %}id{% endif %}" class="text-decoration-none d-inline-flex align-items-center">
+                    ID <i class="bi bi-arrow-down-up fs-5 ms-1"></i>
+                </a>
+            </th>
+
+            <!-- Imię -->
+            <th>
+                <a href="?sort={% if current_sort == 'first_name' %}-first_name{% else %}first_name{% endif %}" class="text-decoration-none d-inline-flex align-items-center">
+                    Imię <i class="bi bi-arrow-down-up fs-5 ms-1"></i>
+                </a>
+            </th>
+
+            <!-- Nazwisko -->
+            <th>
+                <a href="?sort={% if current_sort == 'last_name' %}-last_name{% else %}last_name{% endif %}" class="text-decoration-none d-inline-flex align-items-center">
+                    Nazwisko <i class="bi bi-arrow-down-up fs-5 ms-1"></i>
+                </a>
+            </th>
+
+            <!-- Telefon -->
+            <th>Telefon</th>
+
+            <!-- Typ -->
+            <th>
+                <a href="?sort={% if current_sort == 'customer_type' %}-customer_type{% else %}customer_type{% endif %}" class="text-decoration-none d-inline-flex align-items-center">
+                    Typ <i class="bi bi-arrow-down-up fs-5 ms-1"></i>
+                </a>
+            </th>
+
+            <!-- Punkty -->
+            <th>
+                <a href="?sort={% if current_sort == 'loyalty_points' %}-loyalty_points{% else %}loyalty_points{% endif %}" class="text-decoration-none d-inline-flex align-items-center">
+                    Punkty <i class="bi bi-arrow-down-up fs-5 ms-1"></i>
+                </a>
+            </th>
+
+            <th>Akcje</th>
         </tr>
     </thead>
+
     <tbody>
         {% for customer in customers %}
         <tr>
-            <td style="padding: 8px;">{{ customer.id }}</td>
-            <td style="padding: 8px;">{{ customer.name }}</td>
-            <td style="padding: 8px;">{{ customer.phone }}</td>
-            <td style="padding: 8px;">
-                {% if customer.discount_percent is not None %}
-                    VIP ({{ customer.discount_percent }}%)
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.first_name }}</td>
+            <td>{{ customer.last_name }}</td>
+            <td>{{ customer.phone }}</td>
+            <td>
+                {% if customer.is_vip %}
+                    <span class="badge bg-warning text-dark">VIP ({{ customer.discount_percent }}%)</span>
                 {% else %}
-                    Zwykły
+                    <span class="badge bg-secondary">Zwykły</span>
                 {% endif %}
+            </td>
+            <td>{{ customer.loyalty_points }}</td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                        Akcje
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'customer_edit' customer.id %}">Edytuj</a></li>
+                        <li>
+                            <form method="post" action="{% url 'customer_delete' customer.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item" onclick="return confirm('Na pewno chcesz usunąć tego klienta?');">Usuń</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
             </td>
         </tr>
         {% endfor %}
